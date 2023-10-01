@@ -29,29 +29,32 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.dg_acumulado = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dg_hora = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dg_dia = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
             this.tb_id = new System.Windows.Forms.TextBox();
@@ -76,20 +79,20 @@
             this.estado = new System.Windows.Forms.StatusStrip();
             this.status1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.dg_dia = new System.Windows.Forms.DataGridView();
-            this.dg_hora = new System.Windows.Forms.DataGridView();
-            this.dg_acumulado = new System.Windows.Forms.DataGridView();
+            this.estado1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.estado2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.estado3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_acumulado)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_hora)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_dia)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_modbus)).BeginInit();
             this.estado.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dg_dia)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dg_hora)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dg_acumulado)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -99,7 +102,7 @@
             this.tabControl1.Location = new System.Drawing.Point(4, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(979, 437);
+            this.tabControl1.Size = new System.Drawing.Size(935, 437);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -111,7 +114,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(971, 411);
+            this.tabPage1.Size = new System.Drawing.Size(927, 411);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Datos";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -124,10 +127,51 @@
             this.groupBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.groupBox3.Location = new System.Drawing.Point(6, 208);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(953, 89);
+            this.groupBox3.Size = new System.Drawing.Size(913, 89);
             this.groupBox3.TabIndex = 310;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Acumulado";
+            // 
+            // dg_acumulado
+            // 
+            this.dg_acumulado.AllowUserToAddRows = false;
+            this.dg_acumulado.AllowUserToDeleteRows = false;
+            this.dg_acumulado.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dg_acumulado.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dg_acumulado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dg_acumulado.BackgroundColor = System.Drawing.Color.White;
+            this.dg_acumulado.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dg_acumulado.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dg_acumulado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dg_acumulado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dg_acumulado.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dg_acumulado.GridColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dg_acumulado.Location = new System.Drawing.Point(6, 26);
+            this.dg_acumulado.Name = "dg_acumulado";
+            this.dg_acumulado.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
+            this.dg_acumulado.RowHeadersVisible = false;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dg_acumulado.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dg_acumulado.RowTemplate.Height = 24;
+            this.dg_acumulado.Size = new System.Drawing.Size(897, 57);
+            this.dg_acumulado.TabIndex = 310;
             // 
             // groupBox2
             // 
@@ -137,10 +181,51 @@
             this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.groupBox2.Location = new System.Drawing.Point(6, 101);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(953, 89);
+            this.groupBox2.Size = new System.Drawing.Size(913, 89);
             this.groupBox2.TabIndex = 310;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Hora";
+            // 
+            // dg_hora
+            // 
+            this.dg_hora.AllowUserToAddRows = false;
+            this.dg_hora.AllowUserToDeleteRows = false;
+            this.dg_hora.AllowUserToResizeRows = false;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dg_hora.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.dg_hora.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dg_hora.BackgroundColor = System.Drawing.Color.White;
+            this.dg_hora.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dg_hora.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dg_hora.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.dg_hora.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dg_hora.DefaultCellStyle = dataGridViewCellStyle7;
+            this.dg_hora.GridColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dg_hora.Location = new System.Drawing.Point(6, 26);
+            this.dg_hora.Name = "dg_hora";
+            this.dg_hora.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
+            this.dg_hora.RowHeadersVisible = false;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dg_hora.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            this.dg_hora.RowTemplate.Height = 24;
+            this.dg_hora.Size = new System.Drawing.Size(897, 57);
+            this.dg_hora.TabIndex = 309;
             // 
             // button1
             // 
@@ -160,10 +245,51 @@
             this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(953, 89);
+            this.groupBox1.Size = new System.Drawing.Size(913, 89);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Día";
+            // 
+            // dg_dia
+            // 
+            this.dg_dia.AllowUserToAddRows = false;
+            this.dg_dia.AllowUserToDeleteRows = false;
+            this.dg_dia.AllowUserToResizeRows = false;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dg_dia.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
+            this.dg_dia.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dg_dia.BackgroundColor = System.Drawing.Color.White;
+            this.dg_dia.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dg_dia.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dg_dia.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            this.dg_dia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dg_dia.DefaultCellStyle = dataGridViewCellStyle11;
+            this.dg_dia.GridColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dg_dia.Location = new System.Drawing.Point(6, 26);
+            this.dg_dia.Name = "dg_dia";
+            this.dg_dia.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
+            this.dg_dia.RowHeadersVisible = false;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dg_dia.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            this.dg_dia.RowTemplate.Height = 24;
+            this.dg_dia.Size = new System.Drawing.Size(897, 57);
+            this.dg_dia.TabIndex = 308;
             // 
             // tabPage2
             // 
@@ -187,7 +313,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(971, 411);
+            this.tabPage2.Size = new System.Drawing.Size(927, 411);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Configuración";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -326,7 +452,7 @@
             dataGridViewCellStyle17.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dg_modbus.RowsDefaultCellStyle = dataGridViewCellStyle17;
             this.dg_modbus.RowTemplate.Height = 24;
-            this.dg_modbus.Size = new System.Drawing.Size(952, 86);
+            this.dg_modbus.Size = new System.Drawing.Size(900, 86);
             this.dg_modbus.TabIndex = 307;
             this.dg_modbus.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dg_modbus_KeyUp);
             // 
@@ -441,10 +567,13 @@
             // 
             this.estado.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.status1,
-            this.toolStripStatusLabel1});
+            this.toolStripStatusLabel1,
+            this.estado1,
+            this.estado2,
+            this.estado3});
             this.estado.Location = new System.Drawing.Point(0, 473);
             this.estado.Name = "estado";
-            this.estado.Size = new System.Drawing.Size(991, 22);
+            this.estado.Size = new System.Drawing.Size(944, 22);
             this.estado.TabIndex = 319;
             this.estado.Text = "statusStrip1";
             // 
@@ -458,135 +587,30 @@
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
             // 
-            // dg_dia
+            // estado1
             // 
-            this.dg_dia.AllowUserToAddRows = false;
-            this.dg_dia.AllowUserToDeleteRows = false;
-            this.dg_dia.AllowUserToResizeRows = false;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dg_dia.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
-            this.dg_dia.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dg_dia.BackgroundColor = System.Drawing.Color.White;
-            this.dg_dia.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dg_dia.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Tahoma", 7F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dg_dia.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
-            this.dg_dia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dg_dia.DefaultCellStyle = dataGridViewCellStyle11;
-            this.dg_dia.GridColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dg_dia.Location = new System.Drawing.Point(6, 26);
-            this.dg_dia.Name = "dg_dia";
-            this.dg_dia.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
-            this.dg_dia.RowHeadersVisible = false;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dg_dia.RowsDefaultCellStyle = dataGridViewCellStyle12;
-            this.dg_dia.RowTemplate.Height = 24;
-            this.dg_dia.Size = new System.Drawing.Size(877, 57);
-            this.dg_dia.TabIndex = 308;
+            this.estado1.Name = "estado1";
+            this.estado1.Size = new System.Drawing.Size(118, 17);
+            this.estado1.Text = "toolStripStatusLabel2";
             // 
-            // dg_hora
+            // estado2
             // 
-            this.dg_hora.AllowUserToAddRows = false;
-            this.dg_hora.AllowUserToDeleteRows = false;
-            this.dg_hora.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dg_hora.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
-            this.dg_hora.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dg_hora.BackgroundColor = System.Drawing.Color.White;
-            this.dg_hora.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dg_hora.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dg_hora.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dg_hora.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dg_hora.DefaultCellStyle = dataGridViewCellStyle7;
-            this.dg_hora.GridColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dg_hora.Location = new System.Drawing.Point(6, 26);
-            this.dg_hora.Name = "dg_hora";
-            this.dg_hora.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
-            this.dg_hora.RowHeadersVisible = false;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dg_hora.RowsDefaultCellStyle = dataGridViewCellStyle8;
-            this.dg_hora.RowTemplate.Height = 24;
-            this.dg_hora.Size = new System.Drawing.Size(877, 57);
-            this.dg_hora.TabIndex = 309;
+            this.estado2.Name = "estado2";
+            this.estado2.Size = new System.Drawing.Size(118, 17);
+            this.estado2.Text = "toolStripStatusLabel2";
             // 
-            // dg_acumulado
+            // estado3
             // 
-            this.dg_acumulado.AllowUserToAddRows = false;
-            this.dg_acumulado.AllowUserToDeleteRows = false;
-            this.dg_acumulado.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dg_acumulado.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dg_acumulado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dg_acumulado.BackgroundColor = System.Drawing.Color.White;
-            this.dg_acumulado.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dg_acumulado.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dg_acumulado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dg_acumulado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dg_acumulado.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dg_acumulado.GridColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dg_acumulado.Location = new System.Drawing.Point(6, 26);
-            this.dg_acumulado.Name = "dg_acumulado";
-            this.dg_acumulado.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
-            this.dg_acumulado.RowHeadersVisible = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dg_acumulado.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.dg_acumulado.RowTemplate.Height = 24;
-            this.dg_acumulado.Size = new System.Drawing.Size(877, 57);
-            this.dg_acumulado.TabIndex = 310;
+            this.estado3.Name = "estado3";
+            this.estado3.Size = new System.Drawing.Size(118, 17);
+            this.estado3.Text = "toolStripStatusLabel2";
             // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(991, 495);
+            this.ClientSize = new System.Drawing.Size(944, 495);
             this.Controls.Add(this.estado);
             this.Controls.Add(this.tabControl1);
             this.Name = "main";
@@ -596,16 +620,16 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dg_acumulado)).EndInit();
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dg_hora)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dg_dia)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_modbus)).EndInit();
             this.estado.ResumeLayout(false);
             this.estado.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dg_dia)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dg_hora)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dg_acumulado)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -646,6 +670,9 @@
         private System.Windows.Forms.DataGridView dg_acumulado;
         private System.Windows.Forms.DataGridView dg_hora;
         private System.Windows.Forms.DataGridView dg_dia;
+        private System.Windows.Forms.ToolStripStatusLabel estado1;
+        private System.Windows.Forms.ToolStripStatusLabel estado2;
+        private System.Windows.Forms.ToolStripStatusLabel estado3;
     }
 }
 
