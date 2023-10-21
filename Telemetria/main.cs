@@ -12,18 +12,32 @@ namespace Telemetria
     {
         Scripts sc = new Scripts();
         String[] filas_en;
-        String punto, escala, puerto, rata_modbus, timeout, id_modbus, tipo_request;
+        String punto, escala, puerto, rata_modbus, timeout, id_modbus, tipo_request, cadena_request="";
         //1-dia 2-hora 3-acumulado
         //x-1 index x-2 valores
         int punto_id,frecuencia, contador_request, longitud;
         byte[] request_dia, request_hora, request_acumulado, request_modbus;
+        //705-dia 706-hora 707-acumulado
+        int registro_dia = 705, registro_hora = 706, registro_acumulado = 707;
         public main()
         {
             InitializeComponent();
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            request_modbus = request_acumulado;
+            temporizador.Enabled = true;
+            temporizador.Start();
+            contador_request = 1;
+            tipo_request = "1-1";
+            enviar_modbus(request_modbus, 18);
+        }
+
         private void main_Load(object sender, EventArgs e)
         {
+            puertoserial.DataReceived += new SerialDataReceivedEventHandler(DatareceivedHandler);
             estado1.Text = "";
             estado2.Text = "";
             estado3.Text = "";
@@ -32,6 +46,8 @@ namespace Telemetria
             read_config();
             carga_modbus();
             carga_datos();
+
+            
         }
 
         private void carga_datos()
@@ -81,15 +97,15 @@ namespace Telemetria
             table_acumulado.Columns.Add(new DataColumn("Masa", typeof(string)));
             table_acumulado.Columns.Add(new DataColumn("P. Cal.", typeof(string)));
             table_acumulado.Columns.Add(new DataColumn("Densidad", typeof(string)));
-            table_acumulado.Columns.Add(new DataColumn("Voltaje", typeof(string)));
+            table_acumulado.Columns.Add(new DataColumn("Voltaje", typeof(string))); 
             table_acumulado.Columns.Add(new DataColumn("Rata", typeof(string)));
             table_acumulado.Columns.Add(new DataColumn("Aux1", typeof(string)));
             table_acumulado.Columns.Add(new DataColumn("Aux2", typeof(string)));
 
             //Datos de los puntos
-            String SqlStr_dia = "Select id,fecha,hora,presion,temperatura,energia,volumen,masa,poder,densidad,aux1,aux2 FROM consumo2 Where punto=" + punto_id.ToString() + " AND tiporeg=1 Order by id Desc Limit 1";
-            String SqlStr_hora = "Select id,fecha,hora,presion,temperatura,energia,volumen,masa,poder,densidad,aux1,aux2 FROM consumo2 Where punto=" + punto_id.ToString() + " AND tiporeg=2 Order by id Desc Limit 1";
-            String SqlStr_acumulado = "Select id,fecha,hora,presion,temperatura,energia,volumen,masa,poder,densidad,aux1,aux2 FROM consumo2 Where punto=" + punto_id.ToString() + " AND tiporeg=3 Order by id Desc Limit 1";
+            String SqlStr_dia = "Select id,fecha,hora,presion,temperatura,energia,volumen,masa,poder,densidad,aux1,aux2 FROM consumo3 Where punto=" + punto_id.ToString() + " AND tiporeg=1 Order by id Desc Limit 1";
+            String SqlStr_hora = "Select id,fecha,hora,presion,temperatura,energia,volumen,masa,poder,densidad,aux1,aux2 FROM consumo3 Where punto=" + punto_id.ToString() + " AND tiporeg=2 Order by id Desc Limit 1";
+            String SqlStr_acumulado = "Select id,fecha,hora,presion,temperatura,energia,volumen,masa,poder,densidad,aux1,aux2 FROM consumo3 Where punto=" + punto_id.ToString() + " AND tiporeg=3 Order by id Desc Limit 1";
 
             //DV para cada dg
             DataView dv_dia = sc.get_data(SqlStr_dia, 12, table_dia);
@@ -111,12 +127,14 @@ namespace Telemetria
             string hexa_tipo = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(tipo_modbus)), 1);
             string hexa_cantidad = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(cantidad_modbus)), 0);
             string hexa_dia = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(indices[0])), 0);
+            string hexa_hora = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(indices[1])), 0);
+            string hexa_acumulado = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(indices[2])), 0);
 
             if (tipo == "1")
             {
                 request_dia = sc.crear_request(hexa_id, hexa_tipo, hexa_dia, hexa_cantidad);
-                request_hora = sc.crear_request(hexa_id, hexa_tipo, hexa_dia, hexa_cantidad);
-                request_acumulado = sc.crear_request(hexa_id, hexa_tipo, hexa_dia, hexa_cantidad);
+                request_hora = sc.crear_request(hexa_id, hexa_tipo, hexa_hora, hexa_cantidad);
+                request_acumulado = sc.crear_request(hexa_id, hexa_tipo, hexa_acumulado, hexa_cantidad);
             }
         }
         private void carga_remitentes()
@@ -160,12 +178,13 @@ namespace Telemetria
             table_modbus.Columns.Add(new DataColumn("TempBat", typeof(string)));
             table_modbus.Columns.Add(new DataColumn("Aux1", typeof(string)));
             table_modbus.Columns.Add(new DataColumn("Aux2", typeof(string)));
+            table_modbus.Columns.Add(new DataColumn("Ajuste", typeof(string)));
 
             //Datos de los puntos
-            String SqlStr_modbus = "Select indice,tipo,fecha,hora,presion,temperatura,energia,volumen,masa,poder,densidad,rata,tempbat,aux1,aux2 FROM modbusindex Where punto=" + punto_id.ToString() + " Order by id ASC";
+            String SqlStr_modbus = "Select indice,tipo,fecha,hora,presion,temperatura,energia,volumen,masa,poder,densidad,rata,tempbat,aux1,aux2,ajuste FROM modbusindex Where punto=" + punto_id.ToString() + " Order by id ASC";
 
             //DV para cada dg
-            DataView dv_ga = sc.get_data(SqlStr_modbus, 15, table_modbus);
+            DataView dv_ga = sc.get_data(SqlStr_modbus, 16, table_modbus);
 
             dg_modbus.DataSource = dv_ga;
 
@@ -222,15 +241,19 @@ namespace Telemetria
 
         private void temporizador_Tick(object sender, EventArgs e)
         {
+            
+                estado2.Text += " -" + contador_request.ToString();
             if (contador_request >= 3)
             {
                 temporizador.Enabled = false;
+                temporizador.Stop();
                 if (puertoserial.IsOpen)
                 {
-                    temporizador.Enabled = false;
                     puertoserial.Close();
                     MessageBox.Show("Timeout");
                 }
+                estado2.Text = "Cerrado";
+                estado3.Text = "";
             }
             else
             {
@@ -249,12 +272,55 @@ namespace Telemetria
 
         private void button1_Click(object sender, EventArgs e)
         {
-            request_modbus = request_dia;
-            temporizador.Enabled = true;
-            contador_request = 1;
-            tipo_request = "1-1";
-            enviar_modbus(request_modbus,18);
-          
+
+            //array de ajustes
+            string ajuste = dg_modbus.Rows[0].Cells[15].Value.ToString();
+
+            String[] factor = new string[15];
+            if (ajuste != "")
+            {
+                String[] ajustes = ajuste.Split('-');
+                foreach (string a in ajustes)
+                {
+                    String[] ajustes_factor = a.Split('$');
+                    int tmp_ajuste = 0;
+                    int.TryParse(ajustes_factor[0], out tmp_ajuste);
+                    factor[tmp_ajuste] = ajustes_factor[1];
+                }
+            }
+
+            string cadena = "01033047c7118044dae0005bf42642c92b45491bfb5949ec318a4461c3533d4609cdc309fdc0417ab88a4900000000000000000549";
+            String[] datos_tmp = sc.obtener_datos(cadena);
+            String[] datos = new string[15];
+            int contador = 0;
+
+            foreach (string x in datos_tmp)
+            {
+                contador += 1;
+
+                list_logs.Items.Add(x);
+            }
+            int tmp = 0;
+            string item = "";
+            for (int i = 2; i < 14; i++)
+            {
+                item = dg_modbus.Rows[0].Cells[i].Value.ToString();
+                //list_logs.Items.Add(dg_modbus.Rows[0].Cells[i].Value);
+                if (item != "0")
+                {
+                    int.TryParse(item, out tmp);
+                    datos[i] = datos_tmp[tmp - 1];
+                    list_logs.Items.Add(datos[i].ToString());
+                    if (factor[i-1] != null)
+                    {
+                        double tmp_factor = 0;
+                        double tmp_valor = 0;
+                        double.TryParse(factor[i-1], out tmp_factor);
+                        double.TryParse(datos[i], out tmp_valor);
+                        list_logs.Items.Add((tmp_factor*tmp_valor).ToString());
+                    }
+                }
+            }
         }
 
         private void enviar_modbus(byte[] request_modbus,int longitud_respuesta)
@@ -272,7 +338,6 @@ namespace Telemetria
                     Console.Write(ex.Message);
                 }
             }
-            puertoserial.DataReceived += new SerialDataReceivedEventHandler(DatareceivedHandler);
            
             if (puertoserial.IsOpen)
             {
@@ -287,24 +352,35 @@ namespace Telemetria
             string cadena = "";
             try
             {
-                String indata = puertoserial.ReadExisting();
+                this.puertoserial.Encoding = System.Text.Encoding.GetEncoding(1252);
+                String indata = this.puertoserial.ReadExisting();
+                System.Threading.Thread.Sleep(500);
+                for (int i = 0; i < 3; i++)
+                {
+                    indata += this.puertoserial.ReadExisting();
+                }
                 Console.WriteLine("Data Received");
                 cadena = sc.convertir_hexa(indata);
                 Console.Write(cadena);
                 //MessageBox.Show(cadena);
                 estado1.Text = cadena.Length.ToString();
+                list_logs.Items.Add(cadena);
+                list_logs.Items.Add("long: " + cadena.Length.ToString());
                 if (cadena.Length >= longitud)
                 {
-
-                    temporizador.Enabled = false;
                     //MessageBox.Show(cadena);
                     if (puertoserial.IsOpen)
                     {
+                        //this.temporizador.Enabled=false;
+                        //this.temporizador.Stop();
                         puertoserial.Close();
+                        estado1.Text = "Puerto Cerrado";
                     }
-
+                    estado2.Text = "";
                     estado3.Text = "Respuesta: ok";
-                    procesar_modbus(cadena);
+                    cadena_request = cadena;
+                    this.Invoke(new EventHandler(procesar_modbus));
+                    //procesar_modbus(cadena);
                 }
                 else
                 {
@@ -319,17 +395,58 @@ namespace Telemetria
             }
         }
 
-        private void procesar_modbus(string cadena)
+        private void procesar_modbus(object s, EventArgs e) //(string cadena)
         {
-            if (tipo_request == "1-1") { 
+            this.temporizador.Enabled = false;
+            this.temporizador.Stop();
+            string tipo_modbus = "03";
+            string[] indices = dg_modbus.Rows[0].Cells[0].Value.ToString().Split('-');
+            string tipo = dg_modbus.Rows[0].Cells[1].Value.ToString();
+            string hexa_id = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(id_modbus)), 1);
+            string hexa_tipo = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(tipo_modbus)), 1);
+            int registro = 0;
+            string cadena = cadena_request;
+
+            if (tipo_request == "1-1")
+            {
+                registro = registro_dia;
                 String hex = cadena.Substring(12, 2) + cadena.Substring(10, 2) + cadena.Substring(8, 2) + cadena.Substring(6, 2);
                 var i = int.Parse(hex, NumberStyles.AllowHexSpecifier);
                 var b = BitConverter.GetBytes(i);
                 int index = int.Parse(BitConverter.ToSingle(b, 0).ToString());
                 Console.Write("Index-dia: " + index.ToString());
+                //request_dia = sc.crear_request(hexa_id, hexa_tipo, hexa_dia, hexa_cantidad);
+                string hexa_tipo_registro = sc.completar_hexa(string.Format("{0:x2}", registro), 0);
+                string hexa_cantidad = sc.completar_hexa(string.Format("{0:x2}", index), 0);
+                request_modbus = sc.crear_request(hexa_id, hexa_tipo, hexa_tipo_registro, hexa_cantidad);
+                estado2.Text = "";
+                estado3.Text = "";
+
+                contador_request = 0;
+                temporizador.Interval = int.Parse(timeout);
+                temporizador.Enabled = true;
+                temporizador.Start();
+                tipo_request = "1-2";
+                enviar_modbus(request_modbus, 106);
+                estado3.Text = tipo_request;
+            }
+            else if (tipo_request == "1-2")
+            {
+                estado3.Text = tipo_request;
+
+                Console.Write("Datos-dia: " + cadena);
+                MessageBox.Show(cadena);
+                list_logs.Items.Add(cadena);
+                tb_test.Text = cadena;
+                String[] datos = sc.obtener_datos(cadena);
+                foreach (string x in datos)
+                {
+                    list_logs.Items.Add(x);
+                }
 
             }
         }
+
         //CONFIGURACION INICIAL DE LA APLICACION
         public void write_config()
         {

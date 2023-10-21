@@ -48,6 +48,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dg_acumulado = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -73,6 +74,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cb_puntos = new System.Windows.Forms.ComboBox();
             this.label46 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tb_test = new System.Windows.Forms.TextBox();
+            this.list_logs = new System.Windows.Forms.ListBox();
             this.puertoserial = new System.IO.Ports.SerialPort(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.temporizador = new System.Windows.Forms.Timer(this.components);
@@ -92,6 +96,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dg_dia)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_modbus)).BeginInit();
+            this.tabPage3.SuspendLayout();
             this.estado.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,6 +104,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(4, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -107,6 +113,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Controls.Add(this.groupBox3);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.button1);
@@ -118,6 +125,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Datos";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(676, 345);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 311;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // groupBox3
             // 
@@ -146,7 +163,7 @@
             this.dg_acumulado.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8F);
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -200,7 +217,7 @@
             this.dg_hora.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Tahoma", 8F);
             dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -264,7 +281,7 @@
             this.dg_dia.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle10.BackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Tahoma", 8F);
             dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -549,9 +566,38 @@
             this.label46.TabIndex = 287;
             this.label46.Text = "Frecuencia";
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.tb_test);
+            this.tabPage3.Controls.Add(this.list_logs);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(927, 411);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Logs";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tb_test
+            // 
+            this.tb_test.Location = new System.Drawing.Point(6, 273);
+            this.tb_test.Multiline = true;
+            this.tb_test.Name = "tb_test";
+            this.tb_test.Size = new System.Drawing.Size(751, 93);
+            this.tb_test.TabIndex = 1;
+            // 
+            // list_logs
+            // 
+            this.list_logs.FormattingEnabled = true;
+            this.list_logs.Location = new System.Drawing.Point(6, 3);
+            this.list_logs.Name = "list_logs";
+            this.list_logs.Size = new System.Drawing.Size(783, 264);
+            this.list_logs.TabIndex = 0;
+            // 
             // puertoserial
             // 
             this.puertoserial.PortName = "COM2";
+            this.puertoserial.ReadBufferSize = 8096;
             this.puertoserial.ReadTimeout = 2000;
             // 
             // notifyIcon1
@@ -628,6 +674,8 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_modbus)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.estado.ResumeLayout(false);
             this.estado.PerformLayout();
             this.ResumeLayout(false);
@@ -656,7 +704,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Timer temporizador;
         private System.Windows.Forms.ComboBox cb_rata;
         private System.Windows.Forms.TextBox tb_timeout;
         private System.Windows.Forms.Label label3;
@@ -673,6 +720,11 @@
         private System.Windows.Forms.ToolStripStatusLabel estado1;
         private System.Windows.Forms.ToolStripStatusLabel estado2;
         private System.Windows.Forms.ToolStripStatusLabel estado3;
+        public System.Windows.Forms.Timer temporizador;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.ListBox list_logs;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox tb_test;
     }
 }
 

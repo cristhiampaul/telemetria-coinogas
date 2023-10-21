@@ -202,5 +202,47 @@ namespace Telemetria
             return bytes_modbus;
         }
 
+        public String[] obtener_datos(String cadena)
+        {
+        
+            float longitud = cadena.Length;
+            double campos = Math.Round((longitud / 8), 0)-1;
+            int longitud_modbus = (int) campos;
+            
+            String[] datos= new String[longitud_modbus];
+            String temp = "";
+            try
+            {
+                for (int i = 0; i < longitud_modbus; i++)
+                {
+                    temp = cadena.Substring(6 + (8 * i), 8);
+                    datos[i] = ieee(temp,1); 
+                }
+               
+            }
+            catch(Exception ex)
+            {
+                //registro.Items.Add(" - Falla obteniendo items");
+            }
+
+            return datos;
+
+        }
+
+        private String ieee(String hex, int orden = 0)
+        {
+            if (orden == 1)
+            {
+                hex = hex.Substring(6, 2) + hex.Substring(4, 2) + hex.Substring(2, 2) + hex.Substring(0, 2);
+            }
+            //MessageBox.Show(hex);
+            var i = int.Parse(hex, NumberStyles.AllowHexSpecifier);
+            var b = BitConverter.GetBytes(i);
+            //MessageBox.Show(BitConverter.ToSingle(b, 0).ToString());
+
+            return BitConverter.ToSingle(b, 0).ToString("0.0000");
+
+        }
+
     }
 }
