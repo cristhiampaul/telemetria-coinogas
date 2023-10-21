@@ -171,11 +171,13 @@ namespace Telemetria
         public byte[] crear_request(string hexa_id, string hexa_tipo, string hexa_indice, string hexa_cantidad)
         {
             string modbus_request = hexa_id + hexa_tipo + hexa_indice + hexa_cantidad;
+            
             byte[] modbus_request_byte = StringToByteArray(modbus_request);
             UInt16 u_i2 = ModRTU_CRC(modbus_request_byte, modbus_request_byte.Length);
             string hexa_crc = completar_hexa(u_i2.ToString("X"), 0);
             hexa_crc = hexa_crc.Substring(2, 2) + hexa_crc.Substring(0, 2);
             modbus_request = modbus_request + hexa_crc;
+            
             string modbus_enviar = "";
             int contador = 1;
             foreach (char x in modbus_request)
