@@ -13,6 +13,7 @@ namespace Telemetria
         Scripts sc = new Scripts();
         String[] filas_en, factor = new string[15];
         String punto, escala, puerto, rata_modbus, timeout, id_modbus, tipo_request, cadena_request="";
+        string hexa_dia_registros, hexa_hora_registros, hexa_acumulado_registros;
         //1-dia 2-hora 3-acumulado
         //x-1 index x-2 valores
         int punto_id,frecuencia, contador_request, longitud;
@@ -121,20 +122,21 @@ namespace Telemetria
 
             string tipo_modbus = "03";
             string cantidad_modbus = "1";
-            string[] indices = dg_modbus.Rows[0].Cells[0].Value.ToString().Split('-');
             string tipo = dg_modbus.Rows[0].Cells[1].Value.ToString();
             string hexa_id = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(id_modbus)), 1);
             string hexa_tipo = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(tipo_modbus)), 1);
             string hexa_cantidad = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(cantidad_modbus)), 0);
-            string hexa_dia = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(indices[0])), 0);
-            string hexa_hora = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(indices[1])), 0);
-            string hexa_acumulado = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(indices[2])), 0);
-            string hexa_dia_registros = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(indices[0])), 0);
-            string hexa_hora_registros = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(indices[1])), 0);
-            string hexa_acumulado_registros = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(indices[2])), 0);
 
             if (tipo == "1")
             {
+                string[] indices = dg_modbus.Rows[0].Cells[0].Value.ToString().Split('-');
+                string hexa_dia = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(indices[0])), 0);
+                string hexa_hora = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(indices[1])), 0);
+                string hexa_acumulado = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(indices[2])), 0);
+                string hexa_dia_registros = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(indices[3])), 0);
+                string hexa_hora_registros = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(indices[4])), 0);
+                string hexa_acumulado_registros = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(indices[5])), 0);
+
                 request_dia = sc.crear_request(hexa_id, hexa_tipo, hexa_dia, hexa_cantidad);
                 request_hora = sc.crear_request(hexa_id, hexa_tipo, hexa_hora, hexa_cantidad);
                 request_acumulado = sc.crear_request(hexa_id, hexa_tipo, hexa_acumulado, hexa_cantidad);
@@ -440,16 +442,16 @@ namespace Telemetria
 
             if (tipo_request == "1-1")
             {
-                registro = registro_dia;
+               
                 String hex = cadena.Substring(12, 2) + cadena.Substring(10, 2) + cadena.Substring(8, 2) + cadena.Substring(6, 2);
                 var i = int.Parse(hex, NumberStyles.AllowHexSpecifier);
                 var b = BitConverter.GetBytes(i);
                 int index = int.Parse(BitConverter.ToSingle(b, 0).ToString());
                 Console.Write("Index-dia: " + index.ToString());
                 //request_dia = sc.crear_request(hexa_id, hexa_tipo, hexa_dia, hexa_cantidad);
-                string hexa_tipo_registro = sc.completar_hexa(string.Format("{0:x2}", registro), 0);
+                
                 string hexa_cantidad = sc.completar_hexa(string.Format("{0:x2}", index), 0);
-                request_modbus = sc.crear_request(hexa_id, hexa_tipo, hexa_tipo_registro, hexa_cantidad);
+                request_modbus = sc.crear_request(hexa_id, hexa_tipo, hexa_dia_registros, hexa_cantidad);
                 estado2.Text = "";
                 estado3.Text = "";
 
@@ -460,7 +462,7 @@ namespace Telemetria
                 tipo_request = "1-2";
                 enviar_modbus(request_modbus, 106);
                 list_logs.Items.Add(tipo_request);
-                list_logs.Items.Add(hexa_id+ hexa_tipo+ hexa_tipo_registro+ hexa_cantidad);
+                list_logs.Items.Add(hexa_id+ hexa_tipo+ hexa_dia_registros + hexa_cantidad);
                 estado3.Text = tipo_request;
             }
             else if (tipo_request == "1-2")
@@ -486,16 +488,13 @@ namespace Telemetria
             }
             else if (tipo_request == "2-1")
             {
-                registro = registro_hora;
                 String hex = cadena.Substring(12, 2) + cadena.Substring(10, 2) + cadena.Substring(8, 2) + cadena.Substring(6, 2);
                 var i = int.Parse(hex, NumberStyles.AllowHexSpecifier);
                 var b = BitConverter.GetBytes(i);
                 int index = int.Parse(BitConverter.ToSingle(b, 0).ToString());
                 Console.Write("Index-dia: " + index.ToString());
-                //request_dia = sc.crear_request(hexa_id, hexa_tipo, hexa_dia, hexa_cantidad);
-                string hexa_tipo_registro = sc.completar_hexa(string.Format("{0:x2}", registro), 0);
                 string hexa_cantidad = sc.completar_hexa(string.Format("{0:x2}", index), 0);
-                request_modbus = sc.crear_request(hexa_id, hexa_tipo, hexa_tipo_registro, hexa_cantidad);
+                request_modbus = sc.crear_request(hexa_id, hexa_tipo, hexa_hora_registros, hexa_cantidad);
                 estado2.Text = "";
                 estado3.Text = "";
 
@@ -505,7 +504,7 @@ namespace Telemetria
                 temporizador.Start();
                 tipo_request = "2-2";
                 enviar_modbus(request_modbus, 106);
-                list_logs.Items.Add(hexa_id+ hexa_tipo+ hexa_tipo_registro+ hexa_cantidad);
+                list_logs.Items.Add(hexa_id+ hexa_tipo+ hexa_hora_registros + hexa_cantidad);
                 list_logs.Items.Add(request_modbus);
                 estado3.Text = tipo_request;
             }
@@ -518,8 +517,50 @@ namespace Telemetria
                 //list_logs.Items.Add(cadena);
                 tb_test.Text = cadena;
                 guardar_datos(cadena);
+                //acumulado
+                contador_request = 0;
+                request_modbus = request_hora;
+                temporizador.Enabled = true;
+                temporizador.Start();
+                contador_request = 1;
+                tipo_request = "3-1";
+                enviar_modbus(request_modbus, 18);
+                list_logs.Items.Add(tipo_request);
+                list_logs.Items.Add(request_modbus);
 
-               
+            }
+            else if (tipo_request == "3-1")
+            {
+                String hex = cadena.Substring(12, 2) + cadena.Substring(10, 2) + cadena.Substring(8, 2) + cadena.Substring(6, 2);
+                var i = int.Parse(hex, NumberStyles.AllowHexSpecifier);
+                var b = BitConverter.GetBytes(i);
+                int index = int.Parse(BitConverter.ToSingle(b, 0).ToString());
+                Console.Write("Index-dia: " + index.ToString());
+                string hexa_cantidad = sc.completar_hexa(string.Format("{0:x2}", index), 0);
+                request_modbus = sc.crear_request(hexa_id, hexa_tipo, hexa_acumulado_registros, hexa_cantidad);
+                estado2.Text = "";
+                estado3.Text = "";
+
+                contador_request = 0;
+                temporizador.Interval = int.Parse(timeout);
+                temporizador.Enabled = true;
+                temporizador.Start();
+                tipo_request = "3-2";
+                enviar_modbus(request_modbus, 106);
+                list_logs.Items.Add(hexa_id + hexa_tipo + hexa_acumulado_registros + hexa_cantidad);
+                list_logs.Items.Add(request_modbus);
+                estado3.Text = tipo_request;
+            }
+            else if (tipo_request == "3-2")
+            {
+                estado3.Text = tipo_request;
+
+                Console.Write("Datos-dia: " + cadena);
+                //MessageBox.Show(cadena);
+                //list_logs.Items.Add(cadena);
+                tb_test.Text = cadena;
+                guardar_datos(cadena);
+
             }
         }
 
@@ -574,11 +615,12 @@ namespace Telemetria
             string tempbat = myRow.Cells[12].Value.ToString();
             string aux1 = myRow.Cells[13].Value.ToString();
             string aux2 = myRow.Cells[14].Value.ToString();
+            string ajuste = myRow.Cells[15].Value.ToString();
 
             //Consulta SQL 
             //Set de la Consulta SQL
             String SqlStr = punto_id + "," + indice + "," + tipo + "," + fecha + "," + hora + "," + presion + "," + temperatura + "," + energia + "," + volumen + "," 
-                + masa + "," + poder + "," + densidad + "," + rata + "," + tempbat + "," + aux1 + "," + aux2 +"";
+                + masa + "," + poder + "," + densidad + "," + rata + "," + tempbat + "," + aux1 + "," + aux2 +"," + ajuste;
 
             String rta = sc.enviarN("mod", SqlStr) ;
           
