@@ -212,13 +212,42 @@ namespace Telemetria
             int longitud_modbus = (int) campos;
             
             String[] datos= new String[longitud_modbus];
-            String temp = "";
+            String temp = "",tmp="";
             try
             {
                 for (int i = 0; i < longitud_modbus; i++)
                 {
                     temp = cadena.Substring(6 + (8 * i), 8);
-                    datos[i] = ieee(temp,1); 
+                    if (i == 0)
+                    {
+                        datos[i] = ieee(temp);
+                        char[] x = { '.' };
+                        String[] tmp3 = datos[i].Split(x);
+                        tmp = tmp3[0];
+                        if (tmp.Length == 6)
+                        {
+                            datos[i] = "20" + tmp.Substring(4, 2) + "-" + tmp.Substring(0, 2) + "-" + tmp.Substring(2, 2);
+                        }
+                        else
+                        {
+                            datos[i] = "20" + tmp.Substring(3, 2) + "-0" + tmp.Substring(0, 1) + "-" + tmp.Substring(1, 2);
+                        }
+                    }
+                    else if (i == 1)
+                    {
+                        datos[i] = ieee(temp);
+                        char[] x = { '.' };
+                        String[] tmp3 = datos[i].Split(x);
+                        tmp = tmp3[0];
+                        if (tmp.Length == 1) { datos[i] = "00:00"; }
+                        else if (tmp.Length == 2) { datos[i] = "00:" + tmp.Substring(0, 2); }
+                        else if (tmp.Length == 3) { datos[i] = "0" + tmp.Substring(0, 1) + ":" + tmp.Substring(1, 2); }
+                        else if (tmp.Length == 4) { datos[i] = tmp.Substring(0, 2) + ":" + tmp.Substring(2, 2); }
+                    }
+                    else
+                    { 
+                        datos[i] = ieee(temp,1);
+                    }
                 }
                
             }

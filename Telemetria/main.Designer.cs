@@ -86,6 +86,8 @@
             this.estado1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.estado2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.estado3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.cb_intentos = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -128,7 +130,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(676, 345);
+            this.button2.Location = new System.Drawing.Point(676, 382);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 311;
@@ -142,9 +144,9 @@
             this.groupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.groupBox3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.groupBox3.Location = new System.Drawing.Point(6, 208);
+            this.groupBox3.Location = new System.Drawing.Point(3, 248);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(913, 89);
+            this.groupBox3.Size = new System.Drawing.Size(913, 115);
             this.groupBox3.TabIndex = 310;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Acumulado";
@@ -163,7 +165,7 @@
             this.dg_acumulado.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8F);
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 7F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -187,7 +189,7 @@
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dg_acumulado.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dg_acumulado.RowTemplate.Height = 24;
-            this.dg_acumulado.Size = new System.Drawing.Size(897, 57);
+            this.dg_acumulado.Size = new System.Drawing.Size(897, 83);
             this.dg_acumulado.TabIndex = 310;
             // 
             // groupBox2
@@ -196,9 +198,9 @@
             this.groupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.groupBox2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.groupBox2.Location = new System.Drawing.Point(6, 101);
+            this.groupBox2.Location = new System.Drawing.Point(6, 127);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(913, 89);
+            this.groupBox2.Size = new System.Drawing.Size(913, 115);
             this.groupBox2.TabIndex = 310;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Hora";
@@ -217,7 +219,7 @@
             this.dg_hora.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Tahoma", 8F);
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Tahoma", 7F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -241,12 +243,12 @@
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dg_hora.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dg_hora.RowTemplate.Height = 24;
-            this.dg_hora.Size = new System.Drawing.Size(897, 57);
+            this.dg_hora.Size = new System.Drawing.Size(897, 83);
             this.dg_hora.TabIndex = 309;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(785, 345);
+            this.button1.Location = new System.Drawing.Point(785, 382);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 309;
@@ -262,7 +264,7 @@
             this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(913, 89);
+            this.groupBox1.Size = new System.Drawing.Size(913, 115);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Día";
@@ -281,7 +283,7 @@
             this.dg_dia.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle10.BackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Tahoma", 8F);
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Tahoma", 7F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -305,11 +307,13 @@
             dataGridViewCellStyle12.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dg_dia.RowsDefaultCellStyle = dataGridViewCellStyle12;
             this.dg_dia.RowTemplate.Height = 24;
-            this.dg_dia.Size = new System.Drawing.Size(897, 57);
+            this.dg_dia.Size = new System.Drawing.Size(897, 83);
             this.dg_dia.TabIndex = 308;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.cb_intentos);
+            this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.tb_id);
             this.tabPage2.Controls.Add(this.label6);
@@ -651,6 +655,33 @@
             this.estado3.Size = new System.Drawing.Size(118, 17);
             this.estado3.Text = "toolStripStatusLabel2";
             // 
+            // cb_intentos
+            // 
+            this.cb_intentos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cb_intentos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_intentos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cb_intentos.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.cb_intentos.Location = new System.Drawing.Point(631, 37);
+            this.cb_intentos.Name = "cb_intentos";
+            this.cb_intentos.Size = new System.Drawing.Size(78, 21);
+            this.cb_intentos.TabIndex = 320;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.DarkBlue;
+            this.label8.Location = new System.Drawing.Point(528, 33);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(77, 23);
+            this.label8.TabIndex = 319;
+            this.label8.Text = "Intentos";
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -725,6 +756,8 @@
         private System.Windows.Forms.ListBox list_logs;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox tb_test;
+        private System.Windows.Forms.ComboBox cb_intentos;
+        private System.Windows.Forms.Label label8;
     }
 }
 
