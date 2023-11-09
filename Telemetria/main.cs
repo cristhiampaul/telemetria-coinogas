@@ -17,7 +17,7 @@ namespace Telemetria
         //1-dia 2-hora 3-acumulado
         //x-1 index x-2 valores
         int punto_id,frecuencia, contador_request, longitud, frecuencia_global;
-        int tipo_global = 1;
+        int tipo_global = 1, tipo_modbus=1;
         byte[] request_dia, request_hora, request_acumulado, request_modbus;
         //705-dia 706-hora 707-acumulado
         public main()
@@ -47,12 +47,14 @@ namespace Telemetria
         private void button2_Click(object sender, EventArgs e)
         {
 
-            request_modbus = request_dia;
-            temporizador.Enabled = true;
-            temporizador.Start();
-            contador_request = 1;
-            tipo_request = "1-1";
-            enviar_modbus(request_modbus, 18);
+            //request_modbus = request_dia;
+            //temporizador.Enabled = true;
+            //temporizador.Start();
+            //contador_request = 1;
+            //tipo_request = "1-1";
+            //enviar_modbus(request_modbus, 18);
+            Console.Out.WriteLine("test");
+           
         }
 
 
@@ -60,8 +62,8 @@ namespace Telemetria
         {
             tipo_request = "3-2";
             string cadena = "01033047c80b8044d480007f7a1d429cf6394906974d49ec318a4461c3533d4609cdc3c7bdc041c8a38f490000000000000000a03e";
-
-            guardar_datos(cadena);
+            preparar_correo();
+            //guardar_datos(cadena);
 
         }
 
@@ -93,7 +95,7 @@ namespace Telemetria
                 try { puertoserial.Open(); }
                 catch (Exception ex)
                 {
-                    estatus21.Text = "No se pudo abrir el puerto: " + puerto;
+                    estatus11.Text = "No se pudo abrir el puerto: " + puerto;
                     //MessageBox.Show(ex.Message);
                     Console.Write(ex.Message);
                 }
@@ -103,8 +105,8 @@ namespace Telemetria
             {
                 this.puertoserial.Write(request_modbus, 0, request_modbus.Length);
                 this.puertoserial.Encoding = System.Text.Encoding.GetEncoding(1252);
-                estatus21.Text = "Puerto: " + puerto;
-                estatus22.Text = " Intento: " + contador_request.ToString();
+                estatus11.Text = "Puerto: " + puerto;
+                estatus12.Text = " Intento: " + contador_request.ToString();
             }
         }
 
@@ -117,7 +119,6 @@ namespace Telemetria
             string tipo = dg_modbus.Rows[0].Cells[1].Value.ToString();
             string hexa_id = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(id_modbus)), 1);
             string hexa_tipo = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(tipo_modbus)), 1);
-            int registro = 0;
             string cadena = cadena_request;
 
             if (tipo_request == "1-1")
@@ -238,6 +239,9 @@ namespace Telemetria
                 //list_logs.Items.Add(cadena);
                 tb_test.Text = cadena;
                 guardar_datos(cadena);
+                //preparar_correo();
+
+
 
             }
         }
@@ -247,7 +251,7 @@ namespace Telemetria
         {
             int intentos_conexion = 3;
             int.TryParse(intentos, out intentos_conexion);
-            estatus22.Text += " -" + contador_request.ToString();
+            estatus12.Text = " -" + contador_request.ToString();
             if (contador_request >= intentos_conexion)
             {
                 temporizador.Enabled = false;
@@ -272,9 +276,61 @@ namespace Telemetria
 
         private void temporizador_global_Tick(object sender, EventArgs e)
         {
+            string minuto = DateTime.Now.ToString("mm");
+            string hora = DateTime.Now.ToString("HH");
+            int minuto_ejecucion = 0, minuto_diez_ejecucion=0;
+            int.TryParse(minuto, out minuto_ejecucion);
+            string minuto_diez="0";
+            if (minuto.Length > 0)
+            {
+                minuto_diez = minuto[1].ToString();
+            }
+            int.TryParse(minuto_diez, out minuto_diez_ejecucion);
+            int hora_ejecucion = 0;
+            int.TryParse(hora, out hora_ejecucion);
+            Console.Out.WriteLine(DateTime.Now.ToString());
+
+            estatus21.Text = "Check: " + DateTime.Now;
+            estatus22.Text = "Freq: "+escala;
+
+            if (minuto_ejecucion < 15)
+            {
+                preparar_correo();
+            }
+            if (escala == "Minutos")
+            {
+                ejecucion();
+            }
+            else if (escala == "10Minutos")
+            {                
+                if (minuto_diez_ejecucion == frecuencia)
+                {
+                    ejecucion();
+                }
+            }
+            else if (escala == "Horas")
+            {
+                if (minuto_ejecucion == frecuencia)
+                {
+                    ejecucion();
+                }
+            }
+            else if (escala == "Dias")
+            {
+                if ((minuto_ejecucion == frecuencia) && (hora_ejecucion == 0))
+                {
+                    ejecucion();
+                }
+            }
+        }
+
+        private void ejecucion()
+        {
             list_logs.Items.Clear();
             list_logs.Items.Add(DateTime.Now);
             longitud = 18;
+            estatus23.Text = "Tipo: " + tipo_global.ToString();
+
             if (tipo_global == 1)
             {
                 if (check(tipo_global))
@@ -315,7 +371,6 @@ namespace Telemetria
             contador_request = 1;
             enviar_modbus(request_modbus, longitud);
         }
-
         private Boolean check(int tipo)
         {
 
@@ -490,7 +545,7 @@ namespace Telemetria
             String[] tmp_punto = punto.Split('-');
             int.TryParse(tmp_punto[0],out punto_id);
             puerto = cb_puertos.Text;
-            frecuencia = Convert.ToInt32(tb_frecuencia.Text);
+            frecuencia = Convert.ToInt32(cb_minuto.Text);
             escala = cb_escala.Text;
             puertoserial.PortName = punto;
             rata_modbus = cb_rata.Text;
@@ -571,6 +626,34 @@ namespace Telemetria
                 }
             }
 
+            string id_m = "", nombre_m = "", tipo_m = "", correo_m = "";
+            foreach ( DataGridViewRow row in dg_correo.Rows)
+            {
+                id_m = ""; nombre_m = ""; tipo_m = ""; correo_m = "";
+
+                if (row.Cells[0].Value != null)
+                {
+                    id_m = row.Cells[0].Value.ToString();
+                    nombre_m = row.Cells[1].Value.ToString();
+                    correo_m = row.Cells[2].Value.ToString();
+                    tipo_m = row.Cells[3].Value.ToString();
+                }
+                else if (row.Cells[1].Value != null)
+                {
+                    nombre_m = row.Cells[1].Value.ToString();
+                    correo_m = row.Cells[2].Value.ToString();
+                    tipo_m = row.Cells[3].Value.ToString();
+                }
+                String SqlStr_m = "";
+                if (nombre_m != "")
+                {
+                    SqlStr_m = id_m + "," + nombre_m + "," + tipo_m + "," + correo_m + "," + punto_id;
+                    String rta_m = sc.enviarN("mail", SqlStr_m);
+                }
+
+            }
+
+
             this.Text = "Telemetria - Punto: " + punto;
             carga_modbus();
             MessageBox.Show("Actualizado Correctamente");
@@ -606,7 +689,7 @@ namespace Telemetria
                     }else if (campos[0] == "frecuencia")
                     {
                         int.TryParse(campos[1], out frecuencia);
-                        tb_frecuencia.Text= frecuencia.ToString();
+                        cb_minuto.Text= frecuencia.ToString();
                     }else if (campos[0] == "escala")
                     {
                         escala = campos[1];
@@ -721,9 +804,9 @@ namespace Telemetria
             String SqlStr_acumulado = "Select id,fecha,hora,presion,temperatura,energia,volumen,masa,poder,densidad,voltaje,rata,aux1,aux2 FROM consumo3 Where punto=" + punto_id.ToString() + " AND tiporeg=3 Order by id Desc Limit 1";
 
             //DV para cada dg
-            DataView dv_dia = sc.get_data(SqlStr_dia, 12, table_dia);
-            DataView dv_hora = sc.get_data(SqlStr_hora, 12, table_hora);
-            DataView dv_acumulado = sc.get_data(SqlStr_acumulado, 12, table_acumulado);
+            DataView dv_dia = sc.get_data(SqlStr_dia, 14, table_dia);
+            DataView dv_hora = sc.get_data(SqlStr_hora, 14, table_hora);
+            DataView dv_acumulado = sc.get_data(SqlStr_acumulado, 14, table_acumulado);
 
             dg_dia.DataSource = dv_dia;
             dg_hora.DataSource = dv_hora;
@@ -731,7 +814,7 @@ namespace Telemetria
 
             temporizador.Interval = int.Parse(timeout);
 
-            temporizador_global.Interval = frecuencia_global;
+            //temporizador_global.Interval = frecuencia_global;
             //carga modbus
 
             string tipo_modbus = "03";
@@ -740,7 +823,7 @@ namespace Telemetria
             string hexa_id = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(id_modbus)), 1);
             string hexa_tipo = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(tipo_modbus)), 1);
             string hexa_cantidad = sc.completar_hexa(string.Format("{0:x2}", Int16.Parse(cantidad_modbus)), 0);
-
+            tipo_modbus = tipo;
             if (tipo == "1")
             {
                 string[] indices = dg_modbus.Rows[0].Cells[0].Value.ToString().Split('-');
@@ -755,9 +838,9 @@ namespace Telemetria
                 request_hora = sc.crear_request(hexa_id, hexa_tipo, hexa_hora, hexa_cantidad);
                 request_acumulado = sc.crear_request(hexa_id, hexa_tipo, hexa_acumulado, hexa_cantidad);
 
-                list_logs.Items.Add(hexa_id + hexa_tipo + hexa_dia + hexa_cantidad);
-                list_logs.Items.Add(hexa_id + hexa_tipo + hexa_hora + hexa_cantidad);
-                list_logs.Items.Add(hexa_id + hexa_tipo + hexa_acumulado + hexa_cantidad);
+                //list_logs.Items.Add(hexa_id + hexa_tipo + hexa_dia + hexa_cantidad);
+                //list_logs.Items.Add(hexa_id + hexa_tipo + hexa_hora + hexa_cantidad);
+                //list_logs.Items.Add(hexa_id + hexa_tipo + hexa_acumulado + hexa_cantidad);
             }
             //array de ajustes
             string ajuste = dg_modbus.Rows[0].Cells[15].Value.ToString();
@@ -818,6 +901,13 @@ namespace Telemetria
             table_modbus.Columns.Add(new DataColumn("Aux2", typeof(string)));
             table_modbus.Columns.Add(new DataColumn("Ajuste", typeof(string)));
 
+            //0-fecha 1-hora 2-presion 3-temperatura 4-energia 5-volumen 6-masa 7-PC 8-Densidad 9-TempBatt 10-Rata   
+            //Crear datatable para rellenar datagrid correos
+            DataTable table_correo = new DataTable("TablaModbus");
+            table_correo.Columns.Add(new DataColumn("Id", typeof(string)));
+            table_correo.Columns.Add(new DataColumn("Nombre", typeof(string)));
+            table_correo.Columns.Add(new DataColumn("Correo", typeof(string)));
+            table_correo.Columns.Add(new DataColumn("Tipo", typeof(string)));
             //Datos de los puntos
             String SqlStr_modbus = "Select indice,tipo,fecha,hora,presion,temperatura,energia,volumen,masa,poder,densidad,rata,tempbat,aux1,aux2,ajuste FROM modbusindex Where punto=" + punto_id.ToString() + " Order by id ASC";
 
@@ -825,6 +915,14 @@ namespace Telemetria
             DataView dv_ga = sc.get_data(SqlStr_modbus, 16, table_modbus);
 
             dg_modbus.DataSource = dv_ga;
+
+            //Datos de los puntos
+            SqlStr_modbus = "Select id,nombre,correo,tipo FROM correos Where punto=" + punto_id.ToString() + " Order by id ASC";
+
+            //DV para cada dg
+            DataView dv_co = sc.get_data(SqlStr_modbus, 4, table_correo);
+
+            dg_correo.DataSource = dv_co;
 
         }
 
@@ -878,6 +976,146 @@ namespace Telemetria
             String[] tmp_punto = punto.Split('-');
             int.TryParse(tmp_punto[0], out punto_id);
             carga_modbus();
+        }
+
+        //CORREO
+
+        private void preparar_correo()
+        {
+            Console.Out.WriteLine(DateTime.Now.ToString());
+
+            String SQLStr_d = punto_id.ToString();
+            String SQLStr_h = punto_id.ToString();
+            int freq = 1;
+
+                list_logs.Items.Add("Envio Correo");
+            string c_dia = "", c_hora="";
+            c_dia = dg_dia.Rows[0].Cells[13].Value.ToString();
+            c_hora = dg_hora.Rows[0].Cells[13].Value.ToString();
+            if (c_dia == "") {
+                //string[] names = { "fec", "hor", "pre", "tem", "ene", "vol", "mas", "pod", "den", "teb", "rat" };
+                String[] a_dia = new string[12], a_hora = new string[12], a_acumulado = new string[12];
+                for (int i = 0; i < 11; i++)
+                {
+                    a_dia[i] = dg_dia.Rows[0].Cells[i + 1].Value.ToString();
+                    SQLStr_d += "," + a_dia[i];
+                    a_hora[i] = dg_hora.Rows[0].Cells[i + 1].Value.ToString();
+                    SQLStr_h += "," + a_hora[i];
+                    a_acumulado[i] = dg_acumulado.Rows[0].Cells[i + 1].Value.ToString();
+                }
+                freq = 2;
+                enviar_correo(a_dia, a_hora, a_acumulado, freq);
+                SQLStr_d += ",,'ok',1";
+                String rta = sc.enviarN("con3", SQLStr_d);
+                SQLStr_h += ",,'ok',2";
+                rta = sc.enviarN("con3", SQLStr_h);
+                carga_datos();
+
+            }
+            else if (c_hora == "")
+            {
+                //string[] names = { "fec", "hor", "pre", "tem", "ene", "vol", "mas", "pod", "den", "teb", "rat" };
+                String[] a_dia = new string[12], a_hora = new string[12], a_acumulado = new string[12];
+                for (int i = 0; i < 11; i++)
+                {
+                    a_dia[i] = dg_dia.Rows[0].Cells[i + 1].Value.ToString();
+                    a_hora[i] = dg_hora.Rows[0].Cells[i + 1].Value.ToString();
+                    SQLStr_h += "," + a_hora[i];
+                    a_acumulado[i] = dg_acumulado.Rows[0].Cells[i + 1].Value.ToString();
+                }
+                freq = 1;
+                enviar_correo(a_dia, a_hora, a_acumulado, freq);
+                SQLStr_h += ",,'ok',2";
+                String rta = sc.enviarN("con3", SQLStr_h);
+                carga_datos();
+
+            }
+        }
+        private void enviar_correo(String[] itemD, String[] itemH, String[] itemO, int freq)
+        {
+
+            string[] names = { "fec", "hor", "pre", "tem", "ene", "vol", "mas", "pod", "den", "teb", "rat" };            
+            string mails = "";
+            foreach (DataGridViewRow row in dg_correo.Rows)
+            {
+
+                if (row.Cells[0].Value != null)
+                {
+                    int tmp = 100;
+                    int.TryParse(row.Cells[3].Value.ToString(), out tmp);
+                    if (tmp <= freq)
+                    {
+                        mails += row.Cells[2].Value.ToString() +",";
+                    }
+                }
+            }
+
+            list_logs.Items.Add(mails);
+            mails = "cristhiampaul@gmail.com ";
+
+            string fileName = Directory.GetParent(Application.StartupPath) + "\\templates\\template_mail.htm";
+            string Body = System.IO.File.ReadAllText(fileName);
+
+            if (tipo_modbus != 1)
+            {
+                fileName = Directory.GetParent(Application.StartupPath) + "\\templates\\template_mail_4.htm";
+                Body = System.IO.File.ReadAllText(fileName);
+                for (int i = 0; i < names.Length; i++)
+                {
+                    Body = Body.Replace("#" + names[i] + "O#", itemO[i]);
+                }
+            }
+            else
+            {
+                //registro.Items.Add(" - antes if-"+ itemD.Length);
+                for (int i = 0; i < names.Length; i++)
+                {
+                    Body = Body.Replace("#" + names[i] + "D#", itemD[i]);
+                    Body = Body.Replace("#" + names[i] + "H#", itemH[i]);
+                    Body = Body.Replace("#" + names[i] + "O#", itemO[i]);
+                }
+            }
+
+            Body = Body.Replace("#punto#", punto);
+
+            // Configuracion
+            string SMTP = "smtp.gmail.com";
+            string Usuario = "operacion@coinogas.com";
+            string Contraseña = "Operacion2019.";
+            
+
+            string Asunto = "DATOS TELEMETRIA - " + punto + " - " + itemO[0];// +" - " + itemO[1];
+            int Puerto = 587;
+
+            //Declaro la variable para enviar el correo
+            System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();
+            mail.From = new System.Net.Mail.MailAddress(Usuario);
+            mail.Subject = Asunto;
+            mail.To.Add(mails);
+            mail.IsBodyHtml = true;
+            mail.Body = Body;
+
+
+            //Configuracion del servidor
+            System.Net.Mail.SmtpClient Servidor = new System.Net.Mail.SmtpClient();
+            Servidor.Host = SMTP;
+            Servidor.Port = Puerto;
+            Servidor.EnableSsl = true;
+            Servidor.Credentials = new System.Net.NetworkCredential(Usuario, Contraseña);
+            try
+            {
+                Servidor.Send(mail);
+                list_logs.Items.Add(" - Enviado");
+                estatus11.Text = " - Enviado";
+
+                //bar.Value = 20;
+            }
+            catch (Exception ex)
+            {
+                list_logs.Items.Add(" - FallaEnviado-");
+                estatus11.Text = " - FallaEnviado-";
+                list_logs.Items.Add(ex.Message);
+            }
         }
     }
 }

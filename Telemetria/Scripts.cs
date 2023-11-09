@@ -253,6 +253,7 @@ namespace Telemetria
             }
             catch(Exception ex)
             {
+                Console.Write(ex.Message);
                 //registro.Items.Add(" - Falla obteniendo items");
             }
 

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2E14E79B-9387-436D-B895-75FD046B84DC}</ProjectGuid>
+    <ProjectGuid>{0211C13E-B3BF-40E9-8D38-31480CB1537A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Telemetria</RootNamespace>
-    <AssemblyName>Telemetria</AssemblyName>
+    <RootNamespace>GestorTelemetria</RootNamespace>
+    <AssemblyName>GestorTelemetria</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,17 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="main.cs">
+    <Compile Include="Gestor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="main.Designer.cs">
-      <DependentUpon>main.cs</DependentUpon>
+    <Compile Include="Gestor.Designer.cs">
+      <DependentUpon>Gestor.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts.cs" />
-    <EmbeddedResource Include="main.resx">
-      <DependentUpon>main.cs</DependentUpon>
+    <EmbeddedResource Include="Gestor.resx">
+      <DependentUpon>Gestor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -67,7 +67,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
